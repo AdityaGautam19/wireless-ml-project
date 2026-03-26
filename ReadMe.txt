@@ -16,8 +16,8 @@ Flexible Input: Accepts .npy files or generates random signals with the same for
 
 Below is a screenshot of the **Wireless AI Analyzer UI**, showing the metallic wave background and signal analysis panel.
 
-#### 2. UI Screenshot
-![UI](assets/screenshots/ui_screenshot.png)
+#### UI Screenshot
+![UI](https://github.com/AdityaGautam19/wireless-ml-project/blob/main/assets/screenshots/ui_screenshot.png)
 
 🔹 Dataset
 
@@ -39,9 +39,9 @@ Training is performed in the notebook/training.ipynb notebook and follows these 
     Saving: Save the trained model weights as model.pth.
 
 📂Project Structure
-#### 1. Architecture Screenshot
-![Architecture](assets/screenshots/Architecture_screenshot.png)
+####  Architecture Screenshot
 
+![UI](https://github.com/AdityaGautam19/wireless-ml-project/blob/main/assets/screenshots/Architecture_screenshot.png)
 
 
 🔹 Streamlit UI
