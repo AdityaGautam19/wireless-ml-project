@@ -1,0 +1,9 @@
+link to the dataset as I cannot upload dataset because it is greater than 100 Matplotlib
+LINK : https://www.kaggle.com/datasets/xjayus/rml2016-10a?resource=download 
+Or use API
+import kagglehub
+
+# Download latest version
+path = kagglehub.dataset_download("xjayus/rml2016-10a")
+
+print("Path to dataset files:", path)
