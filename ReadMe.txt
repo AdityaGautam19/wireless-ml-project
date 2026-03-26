@@ -17,8 +17,7 @@ Flexible Input: Accepts .npy files or generates random signals with the same for
 Below is a screenshot of the **Wireless AI Analyzer UI**, showing the metallic wave background and signal analysis panel.
 
 #### UI Screenshot
-![UI](https://github.com/AdityaGautam19/wireless-ml-project/blob/main/assets/screenshots/ui_screenshot.png)
-
+![UI](https://raw.githubusercontent.com/AdityaGautam19/wireless-ml-project/main/assets/screenshots/ui_screenshot.png)
 🔹 Dataset
 
 The project uses the RML2016.10a dataset available on Kaggle. It contains I/Q samples labeled with modulation type and SNR.
