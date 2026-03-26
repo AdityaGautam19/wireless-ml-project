@@ -16,7 +16,8 @@ Flexible Input: Accepts .npy files or generates random signals with the same for
 
 Below is a screenshot of the **Wireless AI Analyzer UI**, showing the metallic wave background and signal analysis panel.
 
-![UI Screenshot](assets/screenshots/Screenshot 2026-03-26 192030.png)
+#### 2. UI Screenshot
+![UI](assets/screenshots/ui_screenshot.png)
 
 🔹 Dataset
 
@@ -38,7 +39,9 @@ Training is performed in the notebook/training.ipynb notebook and follows these 
     Saving: Save the trained model weights as model.pth.
 
 📂Project Structure
-![UI Screenshot](assets/screenshots/architecture_screenshot.png)
+#### 1. Architecture Screenshot
+![Architecture](assets/screenshots/Architecture_screenshot.png)
+
 
 
 🔹 Streamlit UI
@@ -54,10 +57,12 @@ Enjoy a premium animated metallic wave background with shiny headers and glass-l
 ## 🎥 Demo Video
 
 Watch the **Wireless AI Analyzer** in action:
+### 🎥 Demo Video
+[Watch the demo](assets/demo/demoUI.mp4)
 
 <video width="700" controls>
   <source src="assets/demo/demoUI.mp4" type="video/mp4">
-  Your browser does not support the video tag.
+  
 </video>
 
 🔹 Installation
