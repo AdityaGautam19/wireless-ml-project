@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Wireless AI Analyzer: deep learning for modulation classification and SNR prediction from I/Q wireless signals.">
+  <title>Wireless AI Analyzer | ML Signal Intelligence</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="site-shell">
+    <header class="nav">
+      <a class="brand" href="#demo" aria-label="Wireless AI Analyzer home">
+        <span class="brand-mark"></span>
+        <span>Wireless AI Analyzer</span>
+      </a>
+      <nav class="nav-links" aria-label="Primary navigation">
+        <a href="#demo">Demo</a>
+        <a href="#dataset">Dataset</a>
+        <a href="#model">Model</a>
+        <a href="#workflow">Workflow</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </header>
+
+    <main>
+      <section class="hero" id="demo">
+        <div class="hero-copy">
+          <p class="eyebrow">Deep Learning for Wireless Communication</p>
+          <h1>Classify modulation and estimate SNR from raw I/Q signals.</h1>
+          <p class="hero-text">
+            A PyTorch and Streamlit system trained on RML2016.10a to analyze 2 x 128 wireless signal snapshots,
+            surface top modulation probabilities, and predict signal-to-noise ratio in decibels.
+          </p>
+          <div class="hero-actions">
+            <a class="button primary" href="https://wireless-ml-project-higtv4dzz8mrndlgpfnqba.streamlit.app/" target="_blank" rel="noreferrer">
+              Launch Streamlit Demo
+            </a>
+            <a class="button secondary" href="https://github.com/AdityaGautam19/wireless-ml-project" target="_blank" rel="noreferrer">
+              View GitHub Repo
+            </a>
+          </div>
+          <div class="signal-stats" aria-label="Project highlights">
+            <div><strong>220K</strong><span>I/Q samples</span></div>
+            <div><strong>11</strong><span>modulation classes</span></div>
+            <div><strong>20</strong><span>SNR levels</span></div>
+          </div>
+        </div>
+
+        <div class="demo-console" aria-label="Interactive project demo preview">
+          <div class="console-top">
+            <span></span><span></span><span></span>
+            <p>live signal console</p>
+          </div>
+          <video class="demo-video" controls muted playsinline poster="assets/screenshots/ui_screenshot.png">
+            <source src="assets/demo/demoUI.mp4" type="video/mp4">
+          </video>
+          <div class="demo-links">
+            <span>The Streamlit app may take a moment to wake up.</span>
+            <a href="https://wireless-ml-project-higtv4dzz8mrndlgpfnqba.streamlit.app/" target="_blank" rel="noreferrer">Open full demo</a>
+          </div>
+        </div>
+      </section>
+
+      <section class="section band">
+        <div class="section-heading">
+          <p class="eyebrow">Signal Intelligence</p>
+          <h2>Built for wireless ML exploration.</h2>
+        </div>
+        <div class="feature-grid">
+          <article>
+            <h3>Modulation Classification</h3>
+            <p>Predicts BPSK, QPSK, 8PSK, AM, FM, FSK, PAM, and QAM families with top-3 confidence ranking.</p>
+          </article>
+          <article>
+            <h3>SNR Regression</h3>
+            <p>Uses a shared CNN representation and a regression head to estimate signal quality in dB.</p>
+          </article>
+          <article>
+            <h3>I/Q Visualization</h3>
+            <p>Plots in-phase and quadrature channels so each signal can be inspected before reading predictions.</p>
+          </article>
+          <article>
+            <h3>Flexible Input</h3>
+            <p>Supports uploaded .npy signals and random generated samples for quick interactive testing.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="section split" id="dataset">
+        <div>
+          <p class="eyebrow">Dataset</p>
+          <h2>RML2016.10a processed into training-ready tensors.</h2>
+          <p>
+            The project uses the RadioML 2016.10a dataset from Kaggle. The original pickle dictionary is keyed by
+            modulation and SNR pairs, then flattened into arrays for PyTorch training.
+          </p>
+          <a class="text-link" href="https://www.kaggle.com/datasets/xjayus/rml2016-10a?resource=download" target="_blank" rel="noreferrer">
+            Open dataset source
+          </a>
+        </div>
+        <div class="data-panel">
+          <div class="data-row"><span>Source format</span><strong>.pkl dictionary</strong></div>
+          <div class="data-row"><span>Signal shape</span><strong>2 x 128</strong></div>
+          <div class="data-row"><span>Total samples</span><strong>220,000</strong></div>
+          <div class="data-row"><span>Keys</span><strong>220 modulation/SNR pairs</strong></div>
+          <div class="data-row"><span>Per pair</span><strong>1,000 signals</strong></div>
+          <div class="data-row"><span>Split</span><strong>80% train / 20% test</strong></div>
+        </div>
+      </section>
+
+      <section class="section explorer" aria-label="Interactive dataset explorer">
+        <div class="explorer-header">
+          <div>
+            <p class="eyebrow">Interactive Details</p>
+            <h2>Explore the modulation classes.</h2>
+          </div>
+          <div class="class-count"><strong id="classCount">11</strong><span>classes</span></div>
+        </div>
+        <div class="modulation-grid" id="modulationGrid"></div>
+        <div class="signal-lab">
+          <div>
+            <h3 id="selectedMod">QPSK</h3>
+            <p id="selectedDescription">Quadrature Phase Shift Keying uses four phase states and is common in digital wireless links.</p>
+            <div class="snr-strip" id="snrStrip" aria-label="SNR levels"></div>
+          </div>
+          <canvas id="signalCanvas" width="680" height="280" aria-label="Simulated I and Q signal chart"></canvas>
+        </div>
+      </section>
+
+      <section class="section split" id="model">
+        <div class="architecture-card">
+          <img src="assets/screenshots/Architecture_screenshot.png" alt="Project architecture screenshot">
+        </div>
+        <div>
+          <p class="eyebrow">Model</p>
+          <h2>A compact multi-task 1D CNN.</h2>
+          <p>
+            The model learns shared features from I/Q channels, then branches into a classifier for modulation type
+            and a regressor for SNR estimation.
+          </p>
+          <div class="model-list">
+            <span>Conv1D: 2 -> 16 channels, kernel 3</span>
+            <span>Conv1D: 16 -> 32 channels, kernel 3</span>
+            <span>Dense: 32 x 124 -> 128</span>
+            <span>Classifier: 128 -> 11 classes</span>
+            <span>Regressor: 128 -> 1 SNR value</span>
+          </div>
+        </div>
+      </section>
+
+      <section class="section workflow" id="workflow">
+        <div class="section-heading">
+          <p class="eyebrow">Training Workflow</p>
+          <h2>From Kaggle dataset to deployed inference UI.</h2>
+        </div>
+        <div class="timeline">
+          <div><span>01</span><strong>Download</strong><p>Fetch RML2016.10a through KaggleHub or the Kaggle dataset page.</p></div>
+          <div><span>02</span><strong>Preprocess</strong><p>Flatten dictionary keys into X, modulation labels, and SNR labels.</p></div>
+          <div><span>03</span><strong>Encode</strong><p>LabelEncoder maps 11 modulation names into class ids.</p></div>
+          <div><span>04</span><strong>Train</strong><p>Adam optimizes CrossEntropy classification loss plus MSE regression loss.</p></div>
+          <div><span>05</span><strong>Deploy</strong><p>Saved weights are loaded by Streamlit for interactive upload and prediction.</p></div>
+        </div>
+      </section>
+
+      <section class="section contact" id="contact">
+        <div>
+          <p class="eyebrow">Contact</p>
+          <h2>Let’s talk wireless AI.</h2>
+          <p>
+            Aditya Gautam, pre-final CSE student specializing in AI. Reach out for project feedback,
+            collaboration, or questions about the wireless ML pipeline.
+          </p>
+          <div class="contact-links">
+            <a href="mailto:manasgautam19@email.com">manasgautam19@email.com</a>
+            <a href="https://github.com/AdityaGautam19/wireless-ml-project" target="_blank" rel="noreferrer">GitHub repository</a>
+            <a href="https://wireless-ml-project-higtv4dzz8mrndlgpfnqba.streamlit.app/" target="_blank" rel="noreferrer">Live Streamlit demo</a>
+          </div>
+        </div>
+        <form class="contact-form" id="contactForm">
+          <label>
+            Name
+            <input type="text" id="name" name="name" placeholder="Your name" required>
+          </label>
+          <label>
+            Email
+            <input type="email" id="email" name="email" placeholder="you@example.com" required>
+          </label>
+          <label>
+            Message
+            <textarea id="message" name="message" rows="5" placeholder="Write your message..." required></textarea>
+          </label>
+          <button class="button primary" type="submit">Send Email</button>
+          <p class="form-note">This opens your email app with the message ready to send.</p>
+        </form>
+      </section>
+    </main>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
